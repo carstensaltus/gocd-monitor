@@ -17,9 +17,10 @@ ENV NPM_CONFIG_LOGLEVEL warn
 # Set GoCD monitor default environment variables
 ENV GOCD_MONITOR_PORT 3000
 ENV GOCD_MONITOR_DEVPORT 3001
-ENV GOCD_SERVER_URL https://ci.example.com
+ENV GOCD_SERVER_URL https://gocd.example.com
 ENV GOCD_USER admin
 ENV GOCD_PASSWORD password
+
 ENV GOCD_MONITOR_POLLING_INTERVAL 30
 ENV GOCD_MONITOR_SWITCH_PAGES_INTERVAL 0
 ENV GOCD_MONITOR_SHOW_BUILD_LABELS false
@@ -32,6 +33,7 @@ RUN ["apk", "add", "--no-cache", "git"]
 RUN ["git", "clone", "https://github.com/karmats/gocd-monitor.git"]
 WORKDIR "gocd-monitor/"
 ADD app-config.js .
+
 RUN ["npm", "install", "--unsafe-perm"]
 
 # Run karmats GoCD Monitor when launching container
