@@ -1,21 +1,31 @@
 var config = {
     // Name of built js-file
-    jsFilename : 'app.js',
+    jsFilename: 'app.js',
     // Port to run the application on
-    port: process.env.GOCD_MONITOR_PORT,
+    port: process.env.gocdmonitor_port || 3000,
     // Webpack dev port to run on
-    devPort: process.env.GOCD_MONITOR_DEVPORT,
+    devPort: 3001,
+    // Set to true to use https on the post specified above. If set to true, certificate and key paths must be also defined
+    useHttps: process.env.gocdmonitor_use_https === "true",
+    // Certificate for https
+    httpsCertificatePath: process.env.gocdmonitor_certificate_path || './server/cert/server.cert',
+    // Key for https
+    httpsKeyPath: process.env.gocdmonitor_key_path || './server/cert/server.key',
     // Url for your go server
-    goServerUrl: process.env.GOCD_SERVER_URL,
+    goServerUrl: process.env.gocdmonitor_gocd_host || 'https://ci.example.com',
     // Go user to use for communication with go server
-    goUser: process.env.GOCD_USER,
+    goUser: process.env.gocdmonitor_gocd_user || '',
     // Password for go user
-    goPassword: process.env.GOCD_PASSWORD,
+    goPassword: process.env.gocdmonitor_gocd_password || '',
     // How often data from go should be refreshed in seconds
-    goPollingInterval: process.env.GOCD_MONITOR_POLLING_INTERVAL,
+    goPollingInterval: process.env.gocdmonitor_gocd_poll_interval || 30,
     // If > 0 switches between pipeline and test results page every n seconds
-    switchBetweenPagesInterval: process.env.GOCD_MONITOR_SWITCH_PAGES_INTERVAL,
+    switchBetweenPagesInterval: process.env.gocdmonitor_gocd_poll_interval || 0,
     // Whether to display build labels
-    showBuildLabels: process.env.GOCD_MONITOR_SHOW_BUILD_LABELS
+    showBuildLabels: process.env.gocdmonitor_gocd_showbuildlabels === "true",
+    // Whether to group pipelines
+    groupPipelines: process.env.gocdmonitor_gocd_grouppipelines === "true",
+    // Whether to link to pipeline in GoCD on click
+    linkToPipelineInGo: process.env.gocdmonitor_gocd_linktopipelineingo === 'true'
 }
 module.exports = config;
